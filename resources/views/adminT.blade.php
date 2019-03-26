@@ -148,7 +148,7 @@
                 <td>{{$cultivo->TipoSuelo}}</td>
                 <td>{{$cultivo->TamanoCultivo}}</td>
                 <td><a href="#" class="modal-sensor" data-id="{{$cultivo->id}}" title="Agregar URL">{{$cultivo->AreasRiego}}</a></td>
-                <td><a href="#" class="edit-sensor" data-id="{{$cultivo->id}}" title="Editar URL">{{$cultivo->Sensor}}</a></td>
+                <td><a href="#" class="edit-sensor" data-id="{{$cultivo->id}}" data-url="{{$cultivo->Sensor}}" title="Editar URL">{{$cultivo->Sensor}}</a></td>
                 <td>{{$cultivo->created_at}}</td>
                 <td>{{$cultivo->updated_at}}</td>
                 <td style="padding:.3rem;">
