@@ -156,7 +156,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="hectareas" class="col-form-label">Areas de riego:</label>
+                      <label for="hectareas" class="col-form-label">Sensores de Humedad:</label>
                       <div class="input-group">
                         <span class="input-group-prepend">
                           <div class="input-group-text">

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUsernameUsers extends Migration
+class AddLastnamesToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddUsernameUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-          $table->string('username')->unique();
-        });
+      Schema::table('users', function (Blueprint $table) {
+        $table->string('last')->after('name');
+        $table->string('last2')->after('last');
+      });
     }
 
     /**
@@ -25,8 +26,6 @@ class AddUsernameUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }

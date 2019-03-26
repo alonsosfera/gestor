@@ -19,6 +19,8 @@ class UsersController extends Controller
 
       $user = new User;
       $user->name = $request->input('nombreUsuario');
+      $user->last = $request->input('apellidop');
+      $user->last2 = $request->input('apellidom');
       $user->username = $request->input('usuario');
       $user->email = $request->input('correo');
       $user->password = \Hash::make($request->input('usuario'));
@@ -35,6 +37,8 @@ class UsersController extends Controller
        <tr class='item".$user->id."'>
         <th scope='row'>".$user->id."</td>
         <td>".$user->name."</td>
+        <td>".$user->last."</td>
+        <td>".$user->last2."</td>
         <td>".$user->username."</td>
         <td>".$user->email."</td>
         <td>".$user->Client."</td>
@@ -58,6 +62,8 @@ class UsersController extends Controller
         $this->checkUser();
         $user = User::findOrFail($id);
         $user->name = $request->input('nombreUsuario');
+        $user->last = $request->input('apellidop');
+        $user->last2 = $request->input('apellidom');
         $user->username = $request->input('usuario');
         $user->email = $request->input('correo');
         $user->Client = $request->input('admin');
@@ -74,6 +80,8 @@ class UsersController extends Controller
          <tr class='item".$user->id."'>
           <th scope='row'>".$user->id."</td>
           <td>".$user->name."</td>
+          <td>".$user->last."</td>
+          <td>".$user->last2."</td>
           <td>".$user->username."</td>
           <td>".$user->email."</td>
           <td>".$user->Client."</td>
@@ -133,6 +141,8 @@ class UsersController extends Controller
               <tr class='item".$row->id."'>
                <th scope='row'>".$row->id."</td>
                <td>".$row->name."</td>
+               <td>".$row->last."</td>
+               <td>".$row->last2."</td>
                <td>".$row->username."</td>
                <td>".$row->email."</td>
                <td>".$row->Client."</td>
@@ -151,7 +161,7 @@ class UsersController extends Controller
         else{
          $output = '
          <tr>
-          <td align="center" colspan="8">Datos no encontrados</td>
+          <td align="center" colspan="10">Datos no encontrados</td>
          </tr>
          ';
         }

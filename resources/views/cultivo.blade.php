@@ -30,10 +30,10 @@
                     <hr>
                     <div class="row">
                       <div class="col">
-                        <h4><strong>Suelo:</strong> {{$cultivo->TipoSuelo->name}}</h4>
+                        <h4><strong>Suelo:</strong> {{$cultivo->TipoSuelo}}</h4>
                       </div>
                       <div class="col">
-                        <h4><strong>Tamaño:</strong> {{$cultivo->TamanoCultivo}} Hec</h4>
+                        <h4><strong>Hectareas:</strong> {{$cultivo->TamanoCultivo}}</h4>
                       </div>
                     </div>
                     <hr>
@@ -42,7 +42,7 @@
                         <h4><strong>Riego:</strong> {{$cultivo->TipoRiego}}</h4>
                       </div>
                       <div class="col">
-                        <h4><strong>Areas de riego:</strong> {{$cultivo->AreasRiego}}</h4>
+                        <h4><strong>Sensores de Humedad:</strong> {{$cultivo->AreasRiego}}</h4>
                       </div>
                     </div>
                 </div>
@@ -69,11 +69,26 @@
 
           <div class="col-sm-3 col-md-4 col-lg-4">
             <div class="card my-3" align-items-center style="height: 350px;">
-              <h5 class="card-header">Humedad Actual</h5>
+              <h5 class="card-header">Control de Riego</h5>
               <div class="my-auto align-items-center">
                 <div class="card-body" id="humedad">
                   <div class="col">
-                    <input class="input-group-text" id="sensor" type="text" style='width:100%'>
+
+                  </div>
+                  <hr>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-3 col-md-4 col-lg-4">
+            <div class="card my-3" align-items-center style="height: 350px;">
+              <h5 class="card-header">Sensores de Humedad</h5>
+              <div class="my-auto align-items-center">
+                <div class="card-body" id="humedad">
+                  <div class="col">
+
                   </div>
                   <hr>
                   <h3 class="card-title text-center"><strong>Link del Sensor</strong></h3>

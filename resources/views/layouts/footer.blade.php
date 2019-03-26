@@ -8,6 +8,7 @@
     @include('modals.nRiego')
     @include('modals.nSuelo')
     @include('modals.nUsuario')
+    @include('modals.nSensor')
     @include('modals.crud')
 
     <!-- zona de JS -->
@@ -101,6 +102,8 @@
           $('#TituloUsuarioModal').text('Editar Usuario');
           $('#editUsuario').text('Guardar cambios');
           $('#nombreUsuario').val($(this).data('title'));
+          $('#apellidop').val($(this).data('apellidop'));
+          $('#apellidom').val($(this).data('apellidom'));
           $('#usuario').val($(this).data('usuario'));
           $('#correo').val($(this).data('correo'));
           $('#client').val($(this).data('client'));
@@ -151,25 +154,57 @@
     });
 
     // delete a post
-        $(document).on('click', '.delete-modal', function() {
-            $('#deleteModal').modal('show');
-            $('#id_delete').val($(this).data('id'));
-            $('#title_delete').val($(this).data('title'));
-            id = $('#id_delete').val();
+    $(document).on('click', '.delete-modal', function() {
+        $('#deleteModal').modal('show');
+        $('#id_delete').val($(this).data('id'));
+        $('#title_delete').val($(this).data('title'));
+        id = $('#id_delete').val();
+    });
+    $('.modal-footer').on('click', '.delete', function() {
+        var ur = $('#route').text();
+        $.ajax({
+            type: 'DELETE',
+            url: '/d'+ur +'/' + id,
+            data: {
+                '_token': $('input[name=_token]').val(),
+            },
+            success: function(data) {
+                toastr.success('Eliminado correctamente!', 'Exito!', {timeOut: 3000});
+                $('.item' + data['id']).remove();
+            }
         });
-        $('.modal-footer').on('click', '.delete', function() {
-            var ur = $('#route').text();
-            $.ajax({
-                type: 'DELETE',
-                url: '/d'+ur +'/' + id,
-                data: {
+        });
+
+      //add Sensor
+      $(document).on('click', '.modal-sensor', function() {
+            $('#nSensorModal').modal('show');
+            $('#id_c').val($(this).data('id'));
+            id = $('#id_c').val();
+        });
+      $('.modal-footer').on('click', '.sens', function() {
+        $.ajax({
+            type: 'PUT',
+            url: '/sens/'+id,
+            dataType:'json',
+            data: {
                     '_token': $('input[name=_token]').val(),
+                    'id': $("#id_c").val(),
+                    'url': $('#urlSensor').val()
                 },
-                success: function(data) {
-                    toastr.success('Eliminado correctamente!', 'Exito!', {timeOut: 3000});
-                    $('.item' + data['id']).remove();
-                }
-            });
+            success: function(datos) {
+              $('.item' + id).replaceWith(datos.table_data);
+              toastr.success('Actualizado correctamente!', 'Exito!', {timeOut: 3000});
+            }
+        });
+      });
+
+      //edit Sensor
+      $(document).on('click', '.edit-sensor', function() {
+            $('#TituloSensorModal').text('Modificar URL');
+            $('#Sensoresbtn').text('Modificar');
+            $('#nSensorModal').modal('show');
+            $('#id_c').val($(this).data('id'));
+            id = $('#id_c').val();
         });
 
     $(document).on('keyup', '#search', function(e){
@@ -215,6 +250,7 @@
         }
       }
       window.onload = Weather;
+
 
       function RevisarHumedad()
       {

@@ -16,7 +16,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="nombre" class="col-form-label">Nombre del usuario:</label>
+                      <label for="nombre" class="col-form-label">Nombre:</label>
                       <div class="input-group">
                         <span class="input-group-prepend">
                           <div class="input-group-text">
@@ -27,6 +27,44 @@
                         @if ($errors->has('nombreUsuario'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('nombreUsuario') }}</strong>
+                            </span>
+                        @endif
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="apellidop" class="col-form-label">Apellido P:</label>
+                      <div class="input-group">
+                        <span class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-user"></i>
+                          </div>
+                        </span>
+                        <input type="text" class="form-control{{ $errors->has('apellidop') ? ' is-invalid' : '' }}" name="apellidop" id="apellidop" required>
+                        @if ($errors->has('apellidop'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('apellidop') }}</strong>
+                            </span>
+                        @endif
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="apellidom" class="col-form-label">Apellido M:</label>
+                      <div class="input-group">
+                        <span class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-user"></i>
+                          </div>
+                        </span>
+                        <input type="text" class="form-control{{ $errors->has('apellidom') ? ' is-invalid' : '' }}" name="apellidom" id="apellidom" required>
+                        @if ($errors->has('apellidom'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('apellidom') }}</strong>
                             </span>
                         @endif
                       </div>

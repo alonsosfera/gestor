@@ -32,55 +32,74 @@
               @else
                 <!-- DASH DEL ADMIN -->
                 <h1 class="text-center mb-4">Administración</h1>
-                <div class="container-fluid">
                   <div class="card-deck">
-                    <div class="card col-sm-4 col-md-4 col-lg-3 col-xl-2 mx-auto">
-                      <hr>
-                      <button class="btn" style="background-color:white;"><a href="/Usuarios" style="color:black"><i class="fas fa-users fa-10x"></i></a></button>
-                      <hr>
-                      <div class="card-body">
-                        <h5 class="card-title">Usuarios</h5>
-                        <p class="card-text">Administración de los usuarios existentes</p>
+                    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 mx-auto">
+                      <div class="card my-3 align-items-center">
+                        <hr>
+                        <button class="btn" style="background-color:white;"><a href="/Usuarios" style="color:black"><i class="fas fa-users fa-10x"></i></a></button>
+                        <div class="card-body">
+                        <hr>
+                          <h5 class="card-title">Usuarios</h5>
+                          <p class="card-text">Administración de los usuarios existentes</p>
+                        </div>
                       </div>
                     </div>
-                    <div class="card col-sm-4 col-md-4 col-lg-3 col-xl-2 mx-auto">
-                      <hr>
-                      <button class="btn" style="background-color:white;"><a href="/Cultivos" style="color:black"><i class="fas fa-spa fa-10x"></i></a></button>
-                      <hr>
-                      <div class="card-body">
-                        <h5 class="card-title">Cultivos</h5>
-                        <p class="card-text">Administración de los cultivos existentes</p>
+                    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 mx-auto">
+                      <div class="card my-3 align-items-center">
+                        <hr>
+                        <button class="btn" style="background-color:white;"><a href="/Cultivos" style="color:black"><i class="fas fa-spa fa-10x"></i></a></button>
+                        <div class="card-body">
+                        <hr>
+                          <h5 class="card-title">Cultivos</h5>
+                          <p class="card-text">Administración de los cultivos existentes</p>
+                        </div>
                       </div>
                     </div>
-                    <div class="card col-sm-4 col-md-4 col-lg-3 col-xl-2 mx-auto">
-                      <hr>
-                      <button class="btn" style="background-color:white;"><a href="/Frutos" style="color:black"><i class="fas fa-lemon fa-10x"></i></a></button>
-                      <hr>
-                      <div class="card-body">
-                        <h5 class="card-title">Frutos</h5>
-                        <p class="card-text">Administración de los frutos existentes</p>
+                    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 mx-auto">
+                      <div class="card my-3 align-items-center">
+                        <hr>
+                        <button class="btn" style="background-color:white;"><a href="/Frutos" style="color:black"><i class="fas fa-lemon fa-10x"></i></a></button>
+                        <div class="card-body">
+                        <hr>
+                          <h5 class="card-title">Frutos</h5>
+                          <p class="card-text">Administración de los frutos existentes</p>
+                        </div>
                       </div>
                     </div>
-                    <div class="card col-sm-4 col-md-4 col-lg-3 col-xl-2 mx-auto">
-                      <hr>
-                      <button class="btn" style="background-color:white;"><a href="/Riegos" style="color:black"><i class="fas fa-tint fa-10x"></i></a></button>
-                      <hr>
-                      <div class="card-body">
-                        <h5 class="card-title">Riegos</h5>
-                        <p class="card-text">Administración de los tipos de riegos existentes</p>
+                    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 mx-auto">
+                      <div class="card my-3 align-items-center">
+                        <hr>
+                        <button class="btn" style="background-color:white;"><a href="/Riegos" style="color:black"><i class="fas fa-tint fa-10x"></i></a></button>
+                        <div class="card-body">
+                        <hr>
+                          <h5 class="card-title">Riegos</h5>
+                          <p class="card-text">Administración de los tipos de riegos existentes</p>
+                        </div>
                       </div>
                     </div>
-                    <div class="card col-sm-4 col-md-4 col-lg-3 col-xl-2 mx-auto">
-                      <hr>
-                      <button class="btn" style="background-color:white;"><a href="/Suelos" style="color:black"><i class="fas fa-mountain fa-10x"></i></a></button>
-                      <hr>
-                      <div class="card-body">
-                        <h5 class="card-title">Suelos</h5>
-                        <p class="card-text">Administración de los tipos de suelos existentes</p>
+                    <div class=" col-sm-4 col-md-4 col-lg-3 col-xl-2 mx-auto">
+                      <div class="card my-3 align-items-center">
+                        <hr>
+                        <button class="btn" style="background-color:white;"><a href="/Suelos" style="color:black"><i class="fas fa-mountain fa-10x"></i></a></button>
+                        <div class="card-body">
+                        <hr>
+                          <h5 class="card-title">Suelos</h5>
+                          <p class="card-text">Administración de los tipos de suelos existentes</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" col-sm-4 col-md-4 col-lg-3 col-xl-2 mx-auto">
+                      <div class="card my-3 align-items-center">
+                        <hr>
+                        <button class="btn" style="background-color:white;"><a href="/Sensores" style="color:black"><i class="fas fa-filter fa-10x"></i></a></button>
+                        <div class="card-body">
+                        <hr>
+                          <h5 class="card-title">Sensores</h5>
+                          <p class="card-text">Administración de los sensores de los cultivos</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
               @endif
 
 

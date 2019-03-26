@@ -79,7 +79,7 @@
           </a>
         </ul>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" id="dropdown1">
-            <a class="dropdown-item" href="#">{{ Auth::user()->name }}</a>
+            <a class="dropdown-item" href="#">{{ Auth::user()->name }} {{ Auth::user()->last }}</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item disabled" href="#">Configuración</a>
             <div class="dropdown-divider"></div>

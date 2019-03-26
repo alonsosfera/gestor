@@ -46,6 +46,8 @@ Route::put('/eCultivos/{id}', 'CultivosController@update');
 
 Route::put('/eFrutos/{id}', 'TiposCultivoController@update');
 
+Route::put('/sens/{id}', 'CultivosController@sensor');
+
 Route::get('/cultivo/{id}', 'CultivosController@getCultivo')->name('Cultivo');
 
 Route::post('/borrar', 'CultivosController@deleteCultivo')->name('borrarcultivo');
@@ -59,6 +61,8 @@ Route::get('/Frutos', 'TiposCultivoController@getFrutos')->name('Frutos');
 Route::get('/Riegos', 'TiposRiegoController@getAll')->name('Riegos');
 
 Route::get('/Suelos', 'TiposSueloController@getAll')->name('Suelos');
+
+Route::get('/Sensores', 'SensoresController@getAll')->name('Sensores');
 
 Route::get('/search/Usuarios', 'UsersController@search');
 

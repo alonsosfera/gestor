@@ -39,7 +39,9 @@ class CultivosController extends Controller
       $cultivo->AreasRiego = $request->input('areas');
 
       $cultivo->save();
-
+      for($i=1; $i<=$request->input('areas'); $i++){
+        \DB::table('sensores')->insert(['Num' => $i , 'idUsuario' => Auth::id(),'idCultivo' => $cultivo->id]);
+      }
       \DB::table('registro_riegos')->insert(['idCultivo' => $cultivo->id]);
       //$id = $cultivo->id;
       echo json_encode($cultivo);
@@ -72,6 +74,7 @@ class CultivosController extends Controller
           <td>".$cultivo->TipoSuelo."</td>
           <td>".$cultivo->TamanoCultivo."</td>
           <td>".$cultivo->AreasRiego."</td>
+          <td>".$cultivo->Sensor."</td>
           <td>".$cultivo->created_at."</td>
           <td>".$cultivo->updated_at."</td>
           <td style='padding:.3rem;'>
@@ -87,6 +90,43 @@ class CultivosController extends Controller
           'table_data'  => $output
          );
         echo json_encode($data);
+    }
+
+    public function sensor(Request $request, $id){
+      $this->checkUser();
+      $cultivo = Cultivo::findOrFail($id);
+      $cultivo->Sensor = $request->input('url');
+
+      $cultivo->save();
+
+      $output = '';
+      $output .= "
+       <tr class='item".$cultivo->id."'>
+        <th scope='row'>".$cultivo->id."</td>
+        <td>".$cultivo->idUsuario."</td>
+        <td>".$cultivo->NombreCultivo."</td>
+        <td>".$cultivo->TipoCultivo."</td>
+        <td>".$cultivo->Ubicacion."</td>
+        <td>".$cultivo->TipoRiego."</td>
+        <td>".$cultivo->TipoSuelo."</td>
+        <td>".$cultivo->TamanoCultivo."</td>
+        <td>".$cultivo->AreasRiego."</td>
+        <td>".$cultivo->Sensor."</td>
+        <td>".$cultivo->created_at."</td>
+        <td>".$cultivo->updated_at."</td>
+        <td style='padding:.3rem;'>
+            <button class='edit-modal btn btn-info' data-id='".$cultivo->id."' data-title='".$cultivo->NombreCultivo."' data-ubicacion='".$cultivo->Ubicacion."' data-tipo_cultivo='".$cultivo->TipoCultivo."' data-tipo_riego='".$cultivo->TipoRiego."' data-tipo_suelo='".$cultivo->TipoSuelo."' data-hectareas='".$cultivo->TamanoCultivo."' data-areas='".$cultivo->AreasRiego."'>
+            <span class='fas fa-edit'></span></button>
+            <button class='delete-modal btn btn-danger' data-id='".$cultivo->id."' data-title='".$cultivo->NombreCultivo."'>
+            <span class='fas fa-trash'></span></button>
+        </td>
+       </tr>
+       ";
+
+       $data = array(
+        'table_data'  => $output
+       );
+      echo json_encode($data);
     }
 
     public function destroy($id)
@@ -174,6 +214,7 @@ class CultivosController extends Controller
              $output .= "
               <tr class='item".$row->id."'>
                <th scope='row'>".$row->id."</td>
+               <td>".$row->idUsuario."</td>
                <td>".$row->NombreCultivo."</td>
                <td>".$row->Ubicacion."</td>
                <td>".$row->TipoCultivo."</td>

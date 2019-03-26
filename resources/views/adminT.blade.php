@@ -30,8 +30,10 @@
           </tr>
       @if (Route::currentRouteName() == "Usuarios")
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Apellido P</th>
+            <th scope="col">Apellido M</th>
             <th scope="col">Usuario</th>
             <th scope="col">Correo</th>
             <th scope="col">Admin</th>
@@ -46,6 +48,8 @@
               <tr class="item{{$user->id}}">
                 <th scope="row">{{$user->id}}</th>
                 <td>{{$user->name}}</td>
+                <td>{{$user->last}}</td>
+                <td>{{$user->last2}}</td>
                 <td>{{$user->username}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->Client}}</td>
@@ -64,7 +68,7 @@
       @endif
       @if(Route::currentRouteName() == "Frutos")
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Nombre Fruto</th>
             <th scope="col">Kc Enero</th>
             <th scope="col">Kc Febrero</th>
@@ -116,7 +120,7 @@
       @endif
       @if (Route::currentRouteName() == "Cultivos")
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">ID Usuario</th>
             <th scope="col">Nombre del Cultivo</th>
             <th scope="col">Tipo del Fruto</th>
@@ -124,7 +128,8 @@
             <th scope="col">Tipo de Riego</th>
             <th scope="col">Tipo de Suelo</th>
             <th scope="col">Hectareas</th>
-            <th scope="col">Areas de Riego</th>
+            <th scope="col">Sensores</th>
+            <th scope="col">URL</th>
             <th scope="col">Creado</th>
             <th scope="col">Editado</th>
             <th scope="col">Acciones</th>
@@ -142,7 +147,8 @@
                 <td>{{$cultivo->TipoRiego}}</td>
                 <td>{{$cultivo->TipoSuelo}}</td>
                 <td>{{$cultivo->TamanoCultivo}}</td>
-                <td>{{$cultivo->AreasRiego}}</td>
+                <td><a href="#" class="modal-sensor" data-id="{{$cultivo->id}}" title="Agregar URL">{{$cultivo->AreasRiego}}</a></td>
+                <td><a href="#" class="edit-sensor" data-id="{{$cultivo->id}}" title="Editar URL">{{$cultivo->Sensor}}</a></td>
                 <td>{{$cultivo->created_at}}</td>
                 <td>{{$cultivo->updated_at}}</td>
                 <td style="padding:.3rem;">
@@ -158,7 +164,7 @@
       @endif
       @if (Route::currentRouteName() == "Riegos")
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Nombre</th>
             <th scope="col">Eficiencia</th>
             <th scope="col">Creado</th>
@@ -188,7 +194,7 @@
       @endif
       @if (Route::currentRouteName() == "Suelos")
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Nombre</th>
             <th scope="col">Descripción</th>
             <th scope="col">Infiltración</th>
@@ -211,6 +217,38 @@
                     <button class="edit-modal btn btn-info" data-id="{{$suelo->id}}" data-title="{{$suelo->name}}" data-descripcion="{{$suelo->descripcion}}" data-infiltracion="{{$suelo->infiltracion}}">
                     <span class="fas fa-edit"></span></button>
                     <button class="delete-modal btn btn-danger" data-id="{{$suelo->id}}" data-title="{{$suelo->name}}">
+                    <span class="fas fa-trash"></span></button>
+                </td>
+              </tr>
+            @endforeach
+          @endif
+        </tbody>
+      @endif
+      @if (Route::currentRouteName() == "Sensores")
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Numero (En cultivo)</th>
+            <th scope="col">ID Cultivo</th>
+            <th scope="col">ID Usuario</th>
+            <th scope="col">Creado</th>
+            <th scope="col">Editado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="data">
+          @if(count($sensores) > 0)
+            @foreach($sensores as $sensor)
+              <tr class="item{{$sensor->id}}">
+                <th scope="row">{{$sensor->id}}</th>
+                <td>{{$sensor->Num}}</td>
+                <td>{{$sensor->idCultivo}}</td>
+                <td>{{$sensor->idUsuario}}</td>
+                <td>{{$sensor->created_at}}</td>
+                <td>{{$sensor->updated_at}}</td>
+                <td style="padding:.3rem;">
+                    <button class="edit-modal btn btn-info" data-id="{{$sensor->id}}" data-title="{{$sensor->name}}" data-descripcion="{{$sensor->descripcion}}" data-infiltracion="{{$sensor->infiltracion}}">
+                    <span class="fas fa-edit"></span></button>
+                    <button class="delete-modal btn btn-danger" data-id="{{$sensor->id}}" data-title="{{$sensor->name}}">
                     <span class="fas fa-trash"></span></button>
                 </td>
               </tr>
