@@ -197,6 +197,37 @@ class CultivosController extends Controller
       return redirect()->route('Dashboard');
     }
 
+    public function ApiSensor(Request $request){
+      $this->checkUser();
+      if($request->ajax()){
+        $idC = $request->get('idCultivo');
+        $id = $request->get('id');
+
+        $cultivo = Cultivo::findOrFail($idC);
+        $url = $cultivo->Sensor . ':3000/sensor/'.$id;
+
+        $client = new \GuzzleHttp\Client();
+        $response = $client->get($url);
+
+        if($response->getStatusCode() == '200'){
+          $data = $response->getBody()->getContents();
+          $valor = json_decode($data);
+          if($valor->Humedad < 350 && $valor->Humedad > 200)
+            return  'Muy Humedo';
+          else if($valor->Humedad > 350 && $valor->Humedad < 430)
+            return  'Humedo';
+          else if($valor->Humedad > 430 && $valor->Humedad < 600)
+            return  'Seco';
+          else {
+            return 'Error en el sensor';
+          }
+        }else{
+          return  'Error en el servidor del sensor';
+        }
+
+      }
+    }
+
     public function search(Request $request){
       $this->checkUser();
       if($request->ajax()){
@@ -222,6 +253,7 @@ class CultivosController extends Controller
                <td>".$row->TipoSuelo."</td>
                <td>".$row->TamanoCultivo."</td>
                <td>".$row->AreasRiego."</td>
+               <td>".$row->Sensor."</td>
                <td>".$row->created_at."</td>
                <td>".$row->updated_at."</td>
                <td style='padding:.3rem;'>

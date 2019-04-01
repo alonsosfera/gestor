@@ -6,11 +6,6 @@
     <a id="idC" hidden>{{$cultivo['id']}}</a>
 
     <div class="container-fluid">
-      <div class="row">
-        <div class="ml-auto">
-          <button type="button" name="button" class="open-BorrarCultivoDialog btn btn-danger "  data-id="{{$cultivo['id']}}" data-toggle="modal" data-target="#borrarModal">Borrar Cultivo</button>
-        </div>
-      </div>
       <div class="card-deck">
 
           <div class="col-sm-3 col-md-4 col-lg-4 mx-auto">
@@ -42,7 +37,7 @@
                         <h4><strong>Riego:</strong> {{$cultivo->TipoRiego}}</h4>
                       </div>
                       <div class="col">
-                        <h4><strong>Sensores de Humedad:</strong> {{$cultivo->AreasRiego}}</h4>
+                        <h4><strong>Secciones de Riego:</strong> {{$cultivo->AreasRiego}}</h4>
                       </div>
                     </div>
                 </div>
@@ -55,8 +50,8 @@
               <h5 class="card-header">Historial de riego</h5>
               <div class="my-auto align-items-center">
                 <div class="card-body">
-                  <H3 class="text-center">Fecha de ultimo riego:</H3>
-                  <H2 class="text-center">{{strftime("%d %B, %Y - %H:%M", strtotime($riego->fecha))}}</H2>
+                  <H3 class="text-center">Ultimo riego en sección {{$riego->Area}}:</H3>
+                  <H2 class="text-center" title="Area:">{{strftime("%D - %H:%M", strtotime($riego->fecha))}} </H2>
                   <hr>
                   <form class="" action="/registros">
                     <input type="text" name="idCultivo" value="{{$cultivo['id']}}" hidden>
@@ -88,11 +83,17 @@
               <div class="my-auto align-items-center">
                 <div class="card-body" id="humedad">
                   <div class="col">
-
+                    <H1 class="text-center" id="ValorHumedad"></H1>
                   </div>
                   <hr>
-                  <h3 class="card-title text-center"><strong>Link del Sensor</strong></h3>
-                  <button type="button" class="btn btn-success btn-lg btn-block" onclick="RevisarHumedad();">Activar Sensor</button>
+                  <h3 class="card-title text-center"><strong>Humedad</strong></h3>
+                  <select class="form-control{{ $errors->has('Sensor') ? ' is-invalid' : '' }} SelectSensor mx-auto" name="Sensor" id="Sensor" style="text-align-last:center;height:25px; width: 100px;padding:0px" required>
+                  <option value="" selected disabled>Sensor</option>
+                  @for($i=1; $i<=$cultivo->AreasRiego; $i++)
+                    <option value='{{$i}}'> {{$i}}</option>;
+                  @endfor
+                  </select>
+                  <!--<button type="button" class="btn btn-success btn-lg btn-block" onclick="RevisarHumedad();">Activar Sensor</button>-->
                 </div>
               </div>
             </div>
@@ -111,6 +112,11 @@
             </div>
           </div>
       </div>
+        <div class="row">
+          <div class="ml-auto">
+            <button type="button" name="button" class="open-BorrarCultivoDialog btn btn-danger "  data-id="{{$cultivo['id']}}" data-toggle="modal" data-target="#borrarModal">Borrar Cultivo</button>
+          </div>
+        </div>
   </div>
 
 

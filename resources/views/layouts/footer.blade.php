@@ -11,6 +11,7 @@
     @include('modals.nSensor')
     @include('modals.crud')
 
+
     <!-- zona de JS -->
     <!-- Jquery 3.3.1 -->
     <script src="/js/jquery-3.3.1.min.js" type="text/javascript"></script>

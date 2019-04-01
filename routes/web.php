@@ -74,6 +74,8 @@ Route::get('/search/Riegos', 'TiposRiegoController@search');
 
 Route::get('/search/Suelos', 'TiposSueloController@search');
 
+Route::get('/sensapi', 'CultivosController@ApiSensor');
+
 Route::get('/CSV/Usuarios', 'CsvController@Users');
 
 Route::get('/CSV/Cultivos', 'CsvController@Cultivos');

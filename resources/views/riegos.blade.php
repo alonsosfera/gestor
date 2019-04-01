@@ -15,14 +15,16 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Fecha</th>
+          <th scope="col">Sección</th>
         </tr>
       </thead>
       <tbody id="data">
         @if(count($riegos) > 0)
-          @foreach($riegos as $riego)
+          @foreach($riegos as $key=>$riego)
             <tr>
-              <th scope="row">{{$riego->id}}</th>
+              <th scope="row">{{$key+1}}</th>
               <td>{{strftime("%d %B, %Y - %H:%M", strtotime($riego->fecha))}}</td>
+              <td>{{$riego->Area}}</td>
             </tr>
           @endforeach
         @endif
