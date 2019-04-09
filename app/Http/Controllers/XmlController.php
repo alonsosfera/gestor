@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class XmlController extends Controller
 {
-  public function checkUser(){
-      if(!Auth::check()){
-        return view('home');
-      }
-  }
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 }

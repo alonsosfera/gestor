@@ -24,13 +24,9 @@
                           </div>
                         </span>
                         <input type="text" class="form-control" id="id_c" hidden>
-                        <input type="text" class="form-control{{ $errors->has('urlSensor') ? ' is-invalid' : '' }}" name="urlSensor" id="urlSensor" required autofocus>
-                        @if ($errors->has('urlSensor'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('urlSensor') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="urlSensor" id="urlSensor" required autofocus>
                       </div>
+                      <span id="urlSensor_error" style="color:red"></span>
                     </div>
                   </div>
 
@@ -40,7 +36,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" id="Sensoresbtn" data-dismiss="modal" class="btn btn-success sens">Agregar</button>
+              <button type="submit" id="Sensoresbtn" class="btn btn-success sens">Agregar</button>
             </div>
           </form>
         </div>

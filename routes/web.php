@@ -16,6 +16,8 @@ Route::get('/', 'CultivosController@getDashboard')->name('Dashboard');
 
 Auth::routes();
 
+Route::post('/changePassword','UsersController@changePassword')->name('changePassword');
+
 Route::post('/nCultivos', 'CultivosController@submit')->name('crearcultivo');
 
 Route::get('/registros', 'RegistroRiegos@getRiegos')->name('Historial de Riegos');

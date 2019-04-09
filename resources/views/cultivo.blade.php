@@ -64,23 +64,8 @@
 
           <div class="col-sm-3 col-md-4 col-lg-4">
             <div class="card my-3" align-items-center style="height: 350px;">
-              <h5 class="card-header">Control de Riego</h5>
-              <div class="my-auto align-items-center">
-                <div class="card-body" id="humedad">
-                  <div class="col">
-
-                  </div>
-                  <hr>
-
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-3 col-md-4 col-lg-4">
-            <div class="card my-3" align-items-center style="height: 350px;">
-              <h5 class="card-header">Sensores de Humedad</h5>
-              <div class="my-auto align-items-center">
+              <h5 class="card-header">Sectores de Riego</h5>
+              <div id="DivRiego" class="my-auto align-items-center">
                 <div class="card-body" id="humedad">
                   <div class="col">
                     <H1 class="text-center" id="ValorHumedad"></H1>
@@ -88,7 +73,7 @@
                   <hr>
                   <h3 class="card-title text-center"><strong>Humedad</strong></h3>
                   <select class="form-control{{ $errors->has('Sensor') ? ' is-invalid' : '' }} SelectSensor mx-auto" name="Sensor" id="Sensor" style="text-align-last:center;height:25px; width: 100px;padding:0px" required>
-                  <option value="" selected disabled>Sensor</option>
+                  <option value="" selected disabled>Sector</option>
                   @for($i=1; $i<=$cultivo->AreasRiego; $i++)
                     <option value='{{$i}}'> {{$i}}</option>;
                   @endfor

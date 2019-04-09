@@ -10,6 +10,7 @@
     @include('modals.nUsuario')
     @include('modals.nSensor')
     @include('modals.crud')
+    @include('modals.changepassword')
 
 
     <!-- zona de JS -->

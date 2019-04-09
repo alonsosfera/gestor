@@ -23,13 +23,9 @@
                             <i class="fas fa-tag"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('nombre_fruto') ? ' is-invalid' : '' }}" name="nombre_fruto" id="nombre_fruto" required>
-                        @if ($errors->has('nombre_fruto'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('nombre_fruto') }}</strong>
-                            </span>
-                        @endif
-                      </div>
+                        <input type="text" class="form-control" name="nombre_fruto" id="nombre_fruto" required>
+                        </div>
+                        <span id="nombre_fruto_error" style="color:red"></span>
                     </div>
                   </div>
 
@@ -42,13 +38,8 @@
                             <i class="fas fa-location-arrow"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('KC_ENERO') ? ' is-invalid' : '' }}" name="KC_ENERO" id="KC_ENERO" required>
-                        @if ($errors->has('KC_ENERO'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('KC_ENERO') }}</strong>
-                            </span>
-                        @endif
-                      </div>
+                        <input type="text" class="form-control" name="KC_ENERO" id="KC_ENERO" required>
+                        </div>
                     </div>
                   </div>
 
@@ -64,12 +55,7 @@
                             <i class="fas fa-tag"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('KC_FEBRERO') ? ' is-invalid' : '' }}" name="KC_FEBRERO" id="KC_FEBRERO" required>
-                        @if ($errors->has('KC_FEBRERO'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('KC_FEBRERO') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="KC_FEBRERO" id="KC_FEBRERO" required>
                       </div>
                     </div>
                   </div>
@@ -83,12 +69,7 @@
                             <i class="fas fa-location-arrow"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('KC_MARZO') ? ' is-invalid' : '' }}" name="KC_MARZO" id="KC_MARZO" required>
-                        @if ($errors->has('KC_MARZO'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('KC_MARZO') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="KC_MARZO" id="KC_MARZO" required>
                       </div>
                     </div>
                   </div>
@@ -106,12 +87,7 @@
                             <i class="fas fa-tag"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('KC_ABRIL') ? ' is-invalid' : '' }}" name="KC_ABRIL" id="KC_ABRIL" required>
-                        @if ($errors->has('KC_ABRIL'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('KC_ABRIL') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="KC_ABRIL" id="KC_ABRIL" required>
                       </div>
                     </div>
                   </div>
@@ -125,12 +101,7 @@
                             <i class="fas fa-location-arrow"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('KC_MAYO') ? ' is-invalid' : '' }}" name="KC_MAYO" id="KC_MAYO" required>
-                        @if ($errors->has('KC_MAYO'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('KC_MAYO') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="KC_MAYO" id="KC_MAYO" required>
                       </div>
                     </div>
                   </div>
@@ -148,12 +119,7 @@
                             <i class="fas fa-tag"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('KC_JUNIO') ? ' is-invalid' : '' }}" name="KC_JUNIO" id="KC_JUNIO" required>
-                        @if ($errors->has('KC_JUNIO'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('KC_JUNIO') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="KC_JUNIO" id="KC_JUNIO" required>
                       </div>
                     </div>
                   </div>
@@ -167,12 +133,7 @@
                             <i class="fas fa-location-arrow"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('KC_JULIO') ? ' is-invalid' : '' }}" name="KC_JULIO" id="KC_JULIO" required>
-                        @if ($errors->has('KC_JULIO'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('KC_JULIO') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="KC_JULIO" id="KC_JULIO" required>
                       </div>
                     </div>
                   </div>
@@ -189,12 +150,7 @@
                             <i class="fas fa-tag"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('KC_AGOSTO') ? ' is-invalid' : '' }}" name="KC_AGOSTO" id="KC_AGOSTO" required>
-                        @if ($errors->has('KC_AGOSTO'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('KC_AGOSTO') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="KC_AGOSTO" id="KC_AGOSTO" required>
                       </div>
                     </div>
                   </div>
@@ -208,12 +164,7 @@
                             <i class="fas fa-location-arrow"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('KC_SEPTIEMBRE') ? ' is-invalid' : '' }}" name="KC_SEPTIEMBRE" id="KC_SEPTIEMBRE" required>
-                        @if ($errors->has('KC_SEPTIEMBRE'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('KC_SEPTIEMBRE') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="KC_SEPTIEMBRE" id="KC_SEPTIEMBRE" required>
                       </div>
                     </div>
                   </div>
@@ -230,12 +181,7 @@
                             <i class="fas fa-tag"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('KC_OCTUBRE') ? ' is-invalid' : '' }}" name="KC_OCTUBRE" id="KC_OCTUBRE" required>
-                        @if ($errors->has('KC_OCTUBRE'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('KC_OCTUBRE') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="KC_OCTUBRE" id="KC_OCTUBRE" required>
                       </div>
                     </div>
                   </div>
@@ -249,12 +195,7 @@
                             <i class="fas fa-location-arrow"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('KC_NOVIEMBRE') ? ' is-invalid' : '' }}" name="KC_NOVIEMBRE" id="KC_NOVIEMBRE" required>
-                        @if ($errors->has('KC_NOVIEMBRE'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('KC_NOVIEMBRE') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="KC_NOVIEMBRE" id="KC_NOVIEMBRE" required>
                       </div>
                     </div>
                   </div>
@@ -271,12 +212,7 @@
                             <i class="fas fa-tag"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('KC_DICIEMBRE') ? ' is-invalid' : '' }}" name="KC_DICIEMBRE" id="KC_DICIEMBRE" required>
-                        @if ($errors->has('KC_DICIEMBRE'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('KC_DICIEMBRE') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="KC_DICIEMBRE" id="KC_DICIEMBRE" required>
                       </div>
                     </div>
                   </div>
@@ -287,7 +223,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" id="editFruto" data-dismiss="modal" class="btn btn-success add">Crear fruto</button>
+              <button type="submit" id="editFruto" class="btn btn-success add">Crear fruto</button>
             </div>
           </form>
         </div>

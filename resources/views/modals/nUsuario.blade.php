@@ -23,13 +23,9 @@
                             <i class="fas fa-user-tie"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('nombreUsuario') ? ' is-invalid' : '' }}" name="nombreUsuario" id="nombreUsuario" required autofocus>
-                        @if ($errors->has('nombreUsuario'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('nombreUsuario') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="nombreUsuario" id="nombreUsuario" required autofocus>
                       </div>
+                      <span id="nombreUsuario_error" style="color:red"></span>
                     </div>
                   </div>
 
@@ -42,13 +38,9 @@
                             <i class="fas fa-user"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('apellidop') ? ' is-invalid' : '' }}" name="apellidop" id="apellidop" required>
-                        @if ($errors->has('apellidop'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('apellidop') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="apellidop" id="apellidop" required>
                       </div>
+                      <span id="apellidop_error" style="color:red"></span>
                     </div>
                   </div>
 
@@ -61,13 +53,9 @@
                             <i class="fas fa-user"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('apellidom') ? ' is-invalid' : '' }}" name="apellidom" id="apellidom" required>
-                        @if ($errors->has('apellidom'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('apellidom') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="apellidom" id="apellidom" required>
                       </div>
+                      <span id="apellidom_error" style="color:red"></span>
                     </div>
                   </div>
 
@@ -80,13 +68,9 @@
                             <i class="fas fa-user"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('usuario') ? ' is-invalid' : '' }}" name="usuario" id="usuario" required>
-                        @if ($errors->has('usuario'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('usuario') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="usuario" id="usuario" required>
                       </div>
+                      <span id="usuario_error" style="color:red"></span>
                     </div>
                   </div>
 
@@ -102,13 +86,9 @@
                             <i class="fas fa-at"></i>
                           </div>
                         </span>
-                        <input type="email" class="form-control{{ $errors->has('correo') ? ' is-invalid' : '' }}" name="correo" id="correo" required>
-                        @if ($errors->has('correo'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('correo') }}</strong>
-                            </span>
-                        @endif
+                        <input type="email" class="form-control" name="correo" id="correo" required>
                       </div>
+                      <span id="correo_error" style="color:red"></span>
                     </div>
                   </div>
 
@@ -121,13 +101,9 @@
                             <i class="fas fa-hammer"></i>
                           </div>
                         </span>
-                        <input type="checkbox" class="form-control{{ $errors->has('client') ? ' is-invalid' : '' }}" name="client" id="client" value="client">
-                        @if ($errors->has('client'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('client') }}</strong>
-                            </span>
-                        @endif
+                        <input type="checkbox" class="form-control" name="client" id="client" value="client">
                       </div>
+                      <span id="client_error" style="color:red"></span>
                     </div>
                   </div>
 
@@ -138,7 +114,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" id="editUsuario" data-dismiss="modal" class="btn btn-success add">Crear</button>
+              <button type="submit" id="editUsuario" class="btn btn-success add">Crear</button>
             </div>
           </form>
         </div>

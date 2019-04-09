@@ -107,7 +107,8 @@ $('[data-toggle="collapse"]').on('click', function () {
 
 
   // add a post
-$('.modal-footer').on('click', '.add', function() {
+$('.modal-footer').on('click', '.add', function(e) {
+  e.preventDefault();
   var ur = $('#route').text();
   if(ur=='Dashboard'){
     ur='Cultivos';
@@ -123,12 +124,20 @@ $('.modal-footer').on('click', '.add', function() {
       data:datos,
       dataType:'json',
       success: function(datos) {
+        $('#n' + ur +'Modal').modal('hide');
+        document.getElementById("Modal"+ur).reset();
         if(ur=='Cultivos'){
           window.location = '/cultivo/' + datos.id;
         }
         else{
           $('tbody').append(datos.table_data);
           toastr.success('Creado correctamente!', 'Exito!', {timeOut: 3000});
+        }
+      },
+      error: function(reject){
+        if( reject.status === 422 ) {
+            var errors = $.parseJSON(reject.responseText);
+            Validate(errors);
         }
       }
   });
@@ -192,7 +201,8 @@ $(document).on('click', '.edit-modal', function() {
     id = $(this).data('id');
     $('#n'+ur+'Modal').modal('show');
 });
-$('.modal-footer').on('click', '.edit', function() {
+$('.modal-footer').on('click', '.edit', function(e) {
+  e.preventDefault();
   var ur = $('#route').text();
   var inputs=$('#Modal'+ur).serializeArray();
   var datos = {};
@@ -205,6 +215,8 @@ $('.modal-footer').on('click', '.edit', function() {
       data:datos,
       dataType:'json',
       success: function(datos) {
+        $('#n' + ur +'Modal').modal('hide');
+        document.getElementById("Modal"+ur).reset();
         $('.item' + id).replaceWith(datos.table_data);
         toastr.success('Actualizado correctamente!', 'Exito!', {timeOut: 3000});
       }
@@ -212,13 +224,14 @@ $('.modal-footer').on('click', '.edit', function() {
 });
 
 // delete a post
-$(document).on('click', '.delete-modal', function() {
+$(document).on('click', '.delete-modal', function(e) {
     $('#deleteModal').modal('show');
     $('#id_delete').val($(this).data('id'));
     $('#title_delete').val($(this).data('title'));
     id = $('#id_delete').val();
 });
 $('.modal-footer').on('click', '.delete', function() {
+    e.preventDefault();
     var ur = $('#route').text();
     $.ajax({
         type: 'DELETE',
@@ -231,7 +244,7 @@ $('.modal-footer').on('click', '.delete', function() {
             $('.item' + data['id']).remove();
         }
     });
-    });
+});
 
   //add Sensor
   $(document).on('click', '.modal-sensor', function() {
@@ -239,7 +252,8 @@ $('.modal-footer').on('click', '.delete', function() {
         $('#id_c').val($(this).data('id'));
         id = $('#id_c').val();
     });
-  $('.modal-footer').on('click', '.sens', function() {
+  $('.modal-footer').on('click', '.sens', function(e) {
+    e.preventDefault();
     $.ajax({
         type: 'PUT',
         url: '/sens/'+id,
@@ -250,6 +264,8 @@ $('.modal-footer').on('click', '.delete', function() {
                 'url': $('#urlSensor').val()
             },
         success: function(datos) {
+          $('#nSensorModal').modal('hide');
+          document.getElementById("ModalSensores").reset();
           $('.item' + id).replaceWith(datos.table_data);
           toastr.success('Actualizado correctamente!', 'Exito!', {timeOut: 3000});
         }
@@ -285,8 +301,48 @@ $(document).on('keyup', '#search', function(e){
      }
     })
    }
+});
 
+$('.modal-footer').on('click', '.changepwd', function(e) {
+  e.preventDefault();
+  var inputs=$('#ModalPwd').serializeArray();
+  var datos = {};
+  $.each(inputs, function (i, input) {
+    datos[input.name] = input.value;
   });
+  $.ajax({
+      type: 'POST',
+      url: '/changePassword',
+      dataType:'json',
+      data:datos,
+      success: function(resultado) {
+        document.getElementById("ModalPwd").reset();
+        if(resultado.Exito != undefined)
+        {
+            toastr.success(resultado.Exito, 'Exito!', {timeOut: 4000});
+            $('#pwdModal').modal('hide');
+        }else{
+            toastr.warning(resultado.Error, 'Alerta!', {timeOut: 4000});
+        }
+      },
+      error: function(reject){
+        console.log(reject);
+        if( reject.status === 422 ) {
+            Validate(reject.responseJSON);
+        }
+      }
+  });
+});
+
+function Validate(errors){
+        $.each(errors.errors, function (key, val) {
+            $("#" + key + "_error").text(val[0]);
+            setTimeout(function() {
+             $("#" + key + "_error").text("");
+           }, 4500);
+        });
+    toastr.warning('', 'Alerta', {timeOut: 3000});
+}
 
   //Obtener temperatura ambiental del cultivo
   function Weather(){
@@ -314,6 +370,9 @@ $(document).on('keyup', '#search', function(e){
   var t;
   //Sensores de Humedad
   $('.SelectSensor').change(function(){
+    if(!$("#BtnRegar").length){
+      $('#DivRiego').append("<button type='button' id='BtnRegar' class='btn btn-sm btn-success btn-block'>Activar Riego</button>");
+    }
     SensorHumedad();
     clearInterval(t);
     t = setInterval(function() {
@@ -336,7 +395,7 @@ $(document).on('keyup', '#search', function(e){
           $('#ValorHumedad').text(resultado);
       },
       error: function(){
-        toastr.warning('Error al accesar sensor', 'Alerta', {timeOut: 3000});
+        toastr.warning('Error al accesar servidor', 'Alerta', {timeOut: 3000});
       }
     });
   }

@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 
 class CsvController extends Controller
 {
-    public function checkUser(){
-        if(!Auth::check()){
-          return view('home');
-        }
+  public function __construct()
+    {
+        $this->middleware('auth');
     }
 
     public function Download($file, $name){
@@ -32,7 +31,6 @@ class CsvController extends Controller
    * */
 
    public function RiegosCliente($idCultivo){
-      $this->checkUser();
 
       $riegos = \DB::table('registro_riegos')->where('idCultivo','=',$idCultivo)->get();
       $name = 'Riegos'.time();
@@ -47,7 +45,6 @@ class CsvController extends Controller
    }
 
    public function Users(){
-      $this->checkUser();
 
       $users = \DB::table('users')->get();
       $name = 'Usuarios'.time();
@@ -63,7 +60,6 @@ class CsvController extends Controller
    }
 
    public function Cultivos(){
-      $this->checkUser();
 
       $cultivos = \DB::table('cultivos')->get();
       $name = 'Cultivos'.time();
@@ -79,7 +75,6 @@ class CsvController extends Controller
    }
 
    public function Frutos(){
-      $this->checkUser();
 
       $frutos = \DB::table('tipo_cultivos')->get();
       $name = 'Frutos'.time();
@@ -95,7 +90,6 @@ class CsvController extends Controller
    }
 
    public function Riegos(){
-      $this->checkUser();
 
       $riegos = \DB::table('tipo_riegos')->get();
       $name = 'TiposRiego'.time();
@@ -111,7 +105,6 @@ class CsvController extends Controller
    }
 
    public function Suelos(){
-      $this->checkUser();
 
       $suelos = \DB::table('tipo_suelos')->get();
       $name = 'TipoSuelos'.time();

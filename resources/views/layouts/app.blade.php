@@ -82,6 +82,7 @@
             <a class="dropdown-item" href="#">{{ Auth::user()->name }} {{ Auth::user()->last }}</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item disabled" href="#">Configuración</a>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#pwdModal">Cambiar Contraseña</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Salir</a>
           </div>

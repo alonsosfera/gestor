@@ -23,13 +23,9 @@
                             <i class="fas fa-user-tie"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('nombreSuelo') ? ' is-invalid' : '' }}" name="nombreSuelo" id="nombreSuelo" required autofocus>
-                        @if ($errors->has('nombreSuelo'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('nombreSuelo') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="nombreSuelo" id="nombreSuelo" required autofocus>
                       </div>
+                      <span id="nombreSuelo_error" style="color:red"></span>
                     </div>
                   </div>
 
@@ -42,13 +38,9 @@
                             <i class="fas fa-user"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" name="descripcion" id="descripcion">
-                        @if ($errors->has('descripcion'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('descripcion') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="descripcion" id="descripcion">
                       </div>
+                      <span id="descripcion_error" style="color:red"></span>
                     </div>
                   </div>
 
@@ -65,13 +57,9 @@
                             <i class="fas fa-user-tie"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('infiltracion') ? ' is-invalid' : '' }}" name="infiltracion" id="infiltracion" required autofocus>
-                        @if ($errors->has('infiltracion'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('infiltracion') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="infiltracion" id="infiltracion" required autofocus>
                       </div>
+                      <span id="infiltracion_error" style="color:red"></span>
                     </div>
                   </div>
 
@@ -81,7 +69,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" id="editSuelo" data-dismiss="modal" class="btn btn-success add">Crear</button>
+              <button type="submit" id="editSuelo" class="btn btn-success add">Crear</button>
             </div>
           </form>
         </div>

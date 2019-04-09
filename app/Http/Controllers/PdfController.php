@@ -8,15 +8,12 @@ use PDF;
 
 class PdfController extends Controller
 {
-  public function checkUser(){
-      if(!Auth::check()){
-        return view('home');
-      }
-  }
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
   public function RiegosCliente($idCultivo){
-    $this->checkUser();
-
     $pdf = \App::make('dompdf.wrapper');
     $output = '
       <h1 align="center"> Riegos del cultivo </h1>
@@ -43,7 +40,6 @@ class PdfController extends Controller
   }
 
   public function Users(){
-    $this->checkUser();
     $pdf = \App::make('dompdf.wrapper');
     $output = '
       <h1 align="center"> Usuarios </h1>
@@ -79,7 +75,6 @@ class PdfController extends Controller
   }
 
   public function Cultivos(){
-    $this->checkUser();
     $pdf = \App::make('dompdf.wrapper');
     $output = '
       <h1 align="center"> Cultivos </h1>
@@ -122,7 +117,6 @@ class PdfController extends Controller
   }
 
   public function Frutos(){
-    $this->checkUser();
     $pdf = \App::make('dompdf.wrapper');
     $output = '
       <h1 align="center"> Frutos </h1>
@@ -177,7 +171,6 @@ class PdfController extends Controller
   }
 
   public function Riegos(){
-    $this->checkUser();
     $pdf = \App::make('dompdf.wrapper');
     $output = '
       <h1 align="center"> Riegos </h1>
@@ -210,7 +203,6 @@ class PdfController extends Controller
   }
 
   public function Suelos(){
-    $this->checkUser();
     $pdf = \App::make('dompdf.wrapper');
     $output = '
       <h1 align="center"> Suelos </h1>

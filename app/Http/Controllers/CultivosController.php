@@ -9,14 +9,12 @@ use App\User;
 
 class CultivosController extends Controller
 {
-  public function checkUser(){
-      if(!Auth::check()){
-        return view('home');
-      }
-  }
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
   public function submit(Request $request){
-      $this->checkUser();
       $this->validate($request, [
         'nombre_cultivo' => 'required|min:5|max:20',
         'tipo_cultivo' => 'required',
@@ -24,7 +22,7 @@ class CultivosController extends Controller
         'tipo_riego' => 'required',
         'tipo_suelo' => 'required',
         'hectareas' => 'required|integer',
-        'areas' => 'required|integer',
+        'sectores' => 'required|integer',
       ]);
 
       //Create new Cultivo
@@ -36,13 +34,13 @@ class CultivosController extends Controller
       $cultivo->TipoRiego = $request->input('tipo_riego');
       $cultivo->TipoSuelo = $request->input('tipo_suelo');
       $cultivo->TamanoCultivo = $request->input('hectareas');
-      $cultivo->AreasRiego = $request->input('areas');
+      $cultivo->AreasRiego = $request->input('sectores');
 
       $cultivo->save();
-      for($i=1; $i<=$request->input('areas'); $i++){
+      for($i=1; $i<=$request->input('sectores'); $i++){
         \DB::table('sensores')->insert(['Num' => $i , 'idUsuario' => Auth::id(),'idCultivo' => $cultivo->id]);
       }
-      \DB::table('registro_riegos')->insert(['idCultivo' => $cultivo->id]);
+      \DB::table('registro_riegos')->insert(['Num' =>0, 'idCultivo' => $cultivo->id, 'Area' => 0]);
       //$id = $cultivo->id;
       echo json_encode($cultivo);
 
@@ -50,7 +48,6 @@ class CultivosController extends Controller
     }
 
     public function update(Request $request, $id){
-        $this->checkUser();
         $cultivo = Cultivo::findOrFail($id);
         $cultivo->NombreCultivo = $request->input('nombre_cultivo');
         $cultivo->Ubicacion = $request->input('ubicacion');
@@ -58,7 +55,7 @@ class CultivosController extends Controller
         $cultivo->TipoRiego = $request->input('tipo_riego');
         $cultivo->TipoSuelo = $request->input('tipo_suelo');
         $cultivo->TamanoCultivo = $request->input('hectareas');
-        $cultivo->AreasRiego = $request->input('areas');
+        $cultivo->AreasRiego = $request->input('sectores');
 
         $cultivo->save();
 
@@ -93,7 +90,6 @@ class CultivosController extends Controller
     }
 
     public function sensor(Request $request, $id){
-      $this->checkUser();
       $cultivo = Cultivo::findOrFail($id);
       $cultivo->Sensor = $request->input('url');
 
@@ -138,7 +134,6 @@ class CultivosController extends Controller
     }
 
     public function getDashboard(){
-      $this->checkUser();
       $usuario = User::where('id','=',Auth::id())->first();
       if($usuario['Client'] == 1){
         return view('home')->with('cultivos','admin');
@@ -149,7 +144,6 @@ class CultivosController extends Controller
     }
 
     public function getCultivo($idCultivo){
-      $this->checkUser();
 
       $cultivo = Cultivo::with('TipoSuelo')->where([
           ['id','=',$idCultivo],
@@ -165,7 +159,6 @@ class CultivosController extends Controller
     }
 
     public function getAll(){
-      $this->checkUser();
 
       $usuario = User::where('id','=',Auth::id())->first();
       if($usuario['Client'] != 1){
@@ -178,7 +171,6 @@ class CultivosController extends Controller
     }
 
     public function deleteCultivo(Request $request){
-      $this->checkUser();
 
       $this->validate($request, [
         'idCultivo' => 'required'
@@ -198,7 +190,6 @@ class CultivosController extends Controller
     }
 
     public function ApiSensor(Request $request){
-      $this->checkUser();
       if($request->ajax()){
         $idC = $request->get('idCultivo');
         $id = $request->get('id');
@@ -229,7 +220,6 @@ class CultivosController extends Controller
     }
 
     public function search(Request $request){
-      $this->checkUser();
       if($request->ajax()){
         $output = '';
         $query = $request->get('query');

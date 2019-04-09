@@ -9,14 +9,12 @@ use App\User;
 
 class SensoresController extends Controller
 {
-  public function checkUser(){
-      if(!Auth::check()){
-        return view('home');
-      }
-  }
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
   public function getAll(){
-    $this->checkUser();
 
     $usuario = User::where('id','=',Auth::id())->first();
     if($usuario['Client'] <> 1){

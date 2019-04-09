@@ -9,14 +9,12 @@ use App\User;
 
 class TiposSueloController extends Controller
 {
-    public function checkUser(){
-        if(!Auth::check()){
-          return view('home');
-        }
+  public function __construct()
+    {
+        $this->middleware('auth');
     }
 
     protected function new(Request $request){
-      $this->checkUser();
       $this->validate($request, [
         'nombre' => 'required|min:5|max:60',
         'infiltracion' => 'required',
@@ -54,7 +52,6 @@ class TiposSueloController extends Controller
     }
 
     public function update(Request $request, $id){
-        $this->checkUser();
         $suelo = TipoSuelo::findOrFail($id);
         $suelo->name = $request->input('nombreSuelo');
         $suelo->descripcion = $request->input('descripcion');
@@ -94,7 +91,6 @@ class TiposSueloController extends Controller
     }
 
     public function getAll(){
-      $this->checkUser();
 
       $usuario = User::where('id','=',Auth::id())->first();
       if($usuario['Client'] <> 1){
@@ -107,7 +103,6 @@ class TiposSueloController extends Controller
     }
 
     public function search(Request $request){
-      $this->checkUser();
       if($request->ajax()){
         $output = '';
         $query = $request->get('query');

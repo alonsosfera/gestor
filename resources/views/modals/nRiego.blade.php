@@ -23,13 +23,9 @@
                             <i class="fas fa-user-tie"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('nombreRiego') ? ' is-invalid' : '' }}" name="nombreRiego" id="nombreRiego" required autofocus>
-                        @if ($errors->has('nombreRiego'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('nombreRiego') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="nombreRiego" id="nombreRiego" required autofocus>
                       </div>
+                      <span id="nombreRiego_error" style="color:red"></span>
                     </div>
                   </div>
 
@@ -42,13 +38,9 @@
                             <i class="fas fa-user"></i>
                           </div>
                         </span>
-                        <input type="text" class="form-control{{ $errors->has('usuario') ? ' is-invalid' : '' }}" name="eficiencia" id="eficiencia" required>
-                        @if ($errors->has('eficiencia'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('eficiencia') }}</strong>
-                            </span>
-                        @endif
+                        <input type="text" class="form-control" name="eficiencia" id="eficiencia" required>
                       </div>
+                      <span id="eficiencia_error" style="color:red"></span>
                     </div>
                   </div>
 
@@ -58,7 +50,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" id="editRiego" data-dismiss="modal" class="btn btn-success add">Crear</button>
+              <button type="submit" id="editRiego" class="btn btn-success add">Crear</button>
             </div>
           </form>
         </div>

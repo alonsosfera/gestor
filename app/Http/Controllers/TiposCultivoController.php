@@ -9,14 +9,12 @@ use App\User;
 
 class TiposCultivoController extends Controller
 {
-  public function checkUser(){
-      if(!Auth::check()){
-        return view('home');
-      }
-  }
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
   protected function new(Request $request){
-    $this->checkUser();
     $this->validate($request, [
       'nombre' => 'required|min:5|max:60',
       'usuario' => 'required|string|max:14',
@@ -35,7 +33,6 @@ class TiposCultivoController extends Controller
   }
 
   public function update(Request $request, $id){
-      $this->checkUser();
       $fruto = TipoCultivo::findOrFail($id);
       $fruto->NombreFruto = $request->input('nombre_cultivo');
       $fruto->Ubicacion = $request->input('ubicacion');
@@ -82,7 +79,6 @@ class TiposCultivoController extends Controller
   }
 
   public function getFrutos(){
-    $this->checkUser();
     $usuario = User::where('id','=',Auth::id())->first();
     if($usuario['Client'] <> 1){
       return redirect()->route('Dashboard');
@@ -94,7 +90,6 @@ class TiposCultivoController extends Controller
   }
 
   public function search(Request $request){
-    $this->checkUser();
     if($request->ajax()){
       $output = '';
       $query = $request->get('query');

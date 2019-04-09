@@ -9,14 +9,12 @@ use App\Cultivo;
 
 class RegistroRiegos extends Controller
 {
-    public function checkUser(){
-        if(!Auth::check()){
-          return view('home');
-        }
+  public function __construct()
+    {
+        $this->middleware('auth');
     }
 
     public function getRiegos(Request $request){
-      $this->checkUser();
       $idCultivo = $request->input('idCultivo');
 
       $cultivo = Cultivo::where('id','=',$idCultivo)->first();
@@ -30,8 +28,6 @@ class RegistroRiegos extends Controller
     }
 
     public function RealizarRiego($id){
-      $this->checkUser();
-
       \DB::table('registro_riegos')->insert(['idCultivo' => $id]);
       $data=array(
         'EXITO' => 'Exito'
