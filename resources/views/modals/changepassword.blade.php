@@ -1,4 +1,4 @@
-<!-- Cultivo Nuevo Modal -->
+<!-- Change pswd Modal -->
     <div class="modal fade bd-example-modal-lg" id="pwdModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -74,5 +74,6 @@
         </div>
       </div>
     </div>
+  </div>
 
     <!-- /Password Modal -->

@@ -18,7 +18,7 @@ class CultivosController extends Controller
       $this->validate($request, [
         'nombre_cultivo' => 'required|min:5|max:20',
         'tipo_cultivo' => 'required',
-        'ubicacion' => 'required|min:5|max:20',
+        'ubicacion' => 'required',
         'tipo_riego' => 'required',
         'tipo_suelo' => 'required',
         'hectareas' => 'required|integer',
@@ -187,6 +187,18 @@ class CultivosController extends Controller
       $cultivo->delete();
 
       return redirect()->route('Dashboard');
+    }
+
+    public function getUrl($id){
+      $cultivo = Cultivo::findOrFail($id);
+      $url = 'http://api.openweathermap.org/data/2.5/weather?'.$cultivo->Ubicacion.'&APPID=d484fed2f5c8c5eac5e4333abe63793e&units=metric&lang=es';
+
+      $client = new \GuzzleHttp\Client();
+      $response = $client->get($url);
+
+      if($response->getStatusCode() == '200'){
+        return $response->getBody()->getContents();
+      }
     }
 
     public function ApiSensor(Request $request){

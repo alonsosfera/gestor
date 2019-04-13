@@ -32,14 +32,9 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="Ubicación" class="col-form-label">Ubicación:</label>
-                      <div class="input-group">
-                        <span class="input-group-prepend">
-                          <div class="input-group-text">
-                            <i class="fas fa-location-arrow"></i>
-                          </div>
-                        </span>
-                        <input type="text" class="form-control" name="ubicacion" id="ubicacion" required>
-                      </div>
+                      <i class="fas fa-location-arrow"></i>
+                      <button type="button" name="button" class="btn btn-block" id="Dmap" data-dismiss="modal" data-toggle="modal" href="#mapModal"> Seleccionar en el mapa</button>
+                      <input type="text" class="form-control" name="ubicacion" id="ubicacion" required hidden>
                       <span id="ubicacion_error" style="color:red"></span>
                     </div>
                   </div>
@@ -139,7 +134,7 @@
                             <i class="fas fa-square"></i>
                           </div>
                         </span>
-                        <input type="number" class="form-control" name="Sensores" id="sectores" required>
+                        <input type="number" class="form-control" name="sectores" id="sectores" required>
                       </div>
                       <span id="sectores_error" style="color:red"></span>
                     </div>

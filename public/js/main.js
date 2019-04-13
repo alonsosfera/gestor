@@ -5,15 +5,6 @@ $("#menu-toggle").click(function(e) {
     $("#wrapper").toggleClass("toggled");
 });
 
-$(document).on("click", ".open-BorrarCultivoDialog", function () {
- var myIdCultivo = $(this).data('id');
- $(".modal-footer #idCultivo").val( myIdCultivo );
- // As pointed out in comments,
- // it is superfluous to have to manually call the modal.
- // $('#addBookDialog').modal('show');
-});
-
-
 $('[data-toggle="collapse"]').on('click', function () {
     var iconElement = $(this).find("[data-icon-in]");
     var iconIn = iconElement.attr('data-icon-in');
@@ -28,7 +19,7 @@ $('[data-toggle="collapse"]').on('click', function () {
 
   //Inicio BotonTop
   (function(){
-      // Back to Top - by CodyHouse.co
+      // Back to Top
     var backTop = document.getElementsByClassName('js-cd-top')[0],
       // browser window scroll (in pixels) after which the "back to top" link is shown
       offset = 300,
@@ -223,6 +214,12 @@ $('.modal-footer').on('click', '.edit', function(e) {
   });
 });
 
+
+$(document).on("click", ".open-BorrarCultivoDialog", function () {
+ var myIdCultivo = $(this).data('id');
+ $(".modal-footer #idCultivo").val( myIdCultivo );
+});
+
 // delete a post
 $(document).on('click', '.delete-modal', function(e) {
     $('#deleteModal').modal('show');
@@ -348,21 +345,20 @@ function Validate(errors){
   function Weather(){
     var route = $('#route').text();
     if(route=='Cultivo'){
-      var apikey ="d484fed2f5c8c5eac5e4333abe63793e";
-      var apiurl = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q="+$('#UbicacionT').text()+",mx&APPID=" + apikey + "&units=metric&lang=es";
-      //var apiurl = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat=28.12&lon=-105.58&APPID=" + apikey + "&units=metric";
+      id = $('#idC').text();
       $.ajax({
-        type:'GET',
-        url: apiurl,
+        type: 'GET',
+        url:'/weather/'+id,
         dataType: 'json',
         success: function(data){
           $('#temperatura').html(data.main.temp + '&#8451');
-          $('#nombretemperatura').html(data.weather[0].description);
+          $('#nombretemperatura').html(data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1));
         },
         error: function(){
           toastr.warning('Error al accesar temperatura', 'Alerta', {timeOut: 3000});
         }
       });
+
     }
   }
   window.onload = Weather;
@@ -399,6 +395,63 @@ function Validate(errors){
       }
     });
   }
+
+
+  var centerOfMap;
+  var map; //Will contain map object.
+  function initializeGMap() {
+    var marker = false; ////Has the user plotted their location marker?
+
+    centerOfMap = new google.maps.LatLng(28.672184611725022, -106.06179727659674);
+    //Map options.
+    var options = {
+      center: centerOfMap, //Set center.
+      zoom: 6 //The zoom value.
+    };
+    //Create the map object.
+    map = new google.maps.Map(document.getElementById('map_canvas'), options);
+    //Listen for any clicks on the map.
+    google.maps.event.addListener(map, 'click', function(event) {
+        //Get the location that the user clicked.
+        var clickedLocation = event.latLng;
+        //If the marker hasn't been added.
+        if(marker === false){
+            //Create the marker.
+            marker = new google.maps.Marker({
+                position: clickedLocation,
+                map: map,
+                draggable: true //make it draggable
+            });
+            //Listen for drag events!
+            google.maps.event.addListener(marker, 'dragend', function(event){
+                markerLocation();
+            });
+
+            var currentLocation = marker.getPosition();
+            $('#ubicacion').val('lat='+currentLocation.lat()+'&lon='+currentLocation.lng());
+            $('#Dmap').addClass("btn-success");
+            $('#Dmap').text('Ubicación seleccionada');
+        } else{
+            //Marker has already been added, so just change its location.
+            marker.setPosition(clickedLocation);
+            var currentLocation = marker.getPosition();
+            $('#ubicacion').val('lat='+currentLocation.lat()+'&lon='+currentLocation.lng());
+            $('#Dmap').addClass("btn-success");
+            $('#Dmap').text('Ubicación seleccionada');
+        }
+        //Get the marker's location.
+        //markerLocation();
+    });
+  }
+
+  // Re-init map before show modal
+  $('#mapModal').on('show.bs.modal', function(event) {
+    initializeGMap();
+    $("#location-map").css("width", "100%");
+    $("#map_canvas").css("width", "100%");
+  });
+
+
 
   function CardHumedad(humedadp){
     if(humedadp=='20%' || humedadp=='10%' || humedadp=='0%'){

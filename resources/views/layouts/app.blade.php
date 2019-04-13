@@ -17,6 +17,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/css/simple-sidebar.css" rel="stylesheet">
     <link href="/css/custom.css" rel="stylesheet">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ1x304cV6792y1xAfjlzJcxPAS3q8Egc" type="text/javascript"></script>
     <!-- toastr notifications -->
     <link href="/css/toastr.css" rel="stylesheet" />
     <!-- ./ zona de CSS -->

@@ -4,6 +4,7 @@
               @if($cultivos != 'admin')
               <!-- DASH DEL CLIENTE -->
               <h1 class="text-center mb-4">Cultivos Registrados</h1>
+              
               <div class="container-fluid">
                   <div class="card-deck">
                 @if(count($cultivos) > 0)
