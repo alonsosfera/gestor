@@ -27,12 +27,23 @@ class RegistroRiegos extends Controller
       return view('riegos')->with(compact('riegos', 'idCultivo'));//->with('riegos', $riegos);
     }
 
-    public function RealizarRiego($id){
-      \DB::table('registro_riegos')->insert(['idCultivo' => $id]);
-      $data=array(
-        'EXITO' => 'Exito'
-      );
+    public function RealizarRiego(Request $request){
+      
+      $cultivo = Cultivo::findOrFail($request->idCultivo);
+      $url = $cultivo->Sensor . ':3000/valvula/'.$request->idSector;
 
-      echo json_encode($data);
+      $client = new \GuzzleHttp\Client();
+      $response = $client->get($url);
+
+      if($response->getStatusCode() == '200'){
+        $data = $response->getBody()->getContents();
+        $valor = json_decode($data);
+        \DB::table('registro_riegos')->insert(['idCultivo' => $request->idCultivo, 'Area' => $request->idSector]);
+        return 'Realizando riego en sector '.$request->idSector;
+      }else{
+        return 'Error. Hay un problema con las valvulas';
+      }
+
+
     }
 }

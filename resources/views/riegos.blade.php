@@ -15,10 +15,11 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Fecha</th>
-          <th scope="col">Sección</th>
+          <th scope="col">Sector</th>
         </tr>
       </thead>
       <tbody id="data">
+        <p hidden>{{setlocale(LC_ALL,'es_ES')}}</p>
         @if(count($riegos) > 0)
           @foreach($riegos as $key=>$riego)
             <tr>

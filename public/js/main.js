@@ -367,7 +367,7 @@ function Validate(errors){
   //Sensores de Humedad
   $('.SelectSensor').change(function(){
     if(!$("#BtnRegar").length){
-      $('#DivRiego').append("<button type='button' id='BtnRegar' class='btn btn-sm btn-success btn-block'>Activar Riego</button>");
+      $('#DivRiego').append("<button type='button' id='BtnRegar' class='btn btn-sm btn-success btn-block' onclick='GenerarRiego();'>Activar Riego</button>");
     }
     SensorHumedad();
     clearInterval(t);
@@ -391,12 +391,12 @@ function Validate(errors){
           $('#ValorHumedad').text(resultado);
       },
       error: function(){
-        toastr.warning('Error al accesar servidor', 'Alerta', {timeOut: 3000});
+        //toastr.warning('Error al accesar servidor', 'Alerta', {timeOut: 3000});
       }
     });
   }
 
-
+  //Mapa de ubicacion
   var centerOfMap;
   var map; //Will contain map object.
   function initializeGMap() {
@@ -450,26 +450,101 @@ function Validate(errors){
     $("#location-map").css("width", "100%");
     $("#map_canvas").css("width", "100%");
   });
+  // Fin Mapa de ubicacion
 
+  //Generar Riegos
+  function GenerarRiego(){
+    var id = $('.SelectSensor').val();
+    var idC =$('#idC').text();
 
-
-  function CardHumedad(humedadp){
-    if(humedadp=='20%' || humedadp=='10%' || humedadp=='0%'){
-      GenerarRiego();
-    }
-    var content = "<H1 class='text-center'>"+humedadp+"</H1><hr><h3 class='card-title text-center'><strong>Porcentaje de Humedad</strong></h3><button type='button' class='btn btn-success btn-lg btn-block' onclick='RevisarHumedad();'>Actualizar</button> <a id='sensor' value='' hidden>"+$('#sensor').val();+"</a>";
-    $('#humedad').html(content);
+    $.ajax({
+      type: 'GET',
+      url: '/regar',
+      data: {
+        idCultivo : idC,
+        idSector : id
+      },
+      success: function(resultado){
+        console.log(resultado);
+        if(!resultado.includes('Error')){
+            toastr.success(resultado, 'Exito', {timeOut: 3000});
+            $("#Historial").load(location.href + " #Historial");
+        }else{
+          toastr.warning(resultado, 'Alerta', {timeOut: 3000});
+        }
+      },
+      error: function(){
+        toastr.warning('Error al accesar el servidor', 'Alerta', {timeOut: 3000});
+      }
+    });
   }
 
-  function GenerarRiego(){
-    var id = $('#idC').text();
+  //Keep toggle open
+  $('.keep-toggle').on({
+  	"click":function(e){
+        e.stopPropagation();
+      }
+  });
+
+  //On-Off Switch
+  /*function toggleInpOff() {
+    if($('#autocheck').prop('checked')){
+      $('#autocheck').prop('checked', false);
+      LimpiarSectores();
+      Automatizar(null);
+    }
+  }
+  function toggleInpOn() {
+    $('#autocheck').prop('checked', true);
+  }*/
+
+  //Automatizacion de Riegos
+  $('#autocheck').on('click', function() {
     var datos = {};
+    //if($('#autocheck').prop('checked')){
+      var sectores = document.querySelectorAll('input[name="SectorAu"]:checked'), values = [];
+      if(sectores.length==0){
+        //$('#autocheck').prop('checked', false);
+        toastr.warning('Seleccionar sectores para riego automático', 'Alerta', {timeOut: 3000});
+      }else{
+        var index =1;
+        Array.prototype.forEach.call(sectores, function(sector) {
+          datos[index] = sector.value;
+          index++;
+        });
+        console.log(datos);
+        Automatizar(datos);
+      }
+    /*}else{
+      LimpiarSectores();
+      $('#autotime').val(0);
+      Automatizar(null);
+    }*/
+  });
+
+  function LimpiarSectores(){
+    var sectores = document.querySelectorAll('input[name="SectorAu"]:checked'), values = [];
+    Array.prototype.forEach.call(sectores, function(sector) {
+      sector.checked = false;
+    });
+  }
+
+  function Automatizar(datos){
     $.ajax({
-      type: 'PUT',
-      url: '/registro/'+id,
-      data:datos,
-      success: function(datos){
-        toastr.success('Realizando riego', 'Atención!', {timeOut: 4000});
+      type: 'POST',
+      url: '/auto/'+$('#idC').text()+'/'+$('#autotime').val(),
+      data: datos,
+      success: function(resultado){
+        console.log(resultado);
+        if(resultado.includes("apagado")){
+          toastr.warning(resultado, 'Exito', {timeOut: 3000});
+        }else{
+          toastr.success(resultado, 'Exito', {timeOut: 3000});
+        }
+        LimpiarSectores();
       },
+      error: function(){
+        toastr.warning('Error al accesar el servidor', 'Alerta', {timeOut: 3000});
+      }
     });
   }
