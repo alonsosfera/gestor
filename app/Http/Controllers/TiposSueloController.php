@@ -16,7 +16,7 @@ class TiposSueloController extends Controller
 
     protected function new(Request $request){
       $this->validate($request, [
-        'nombre' => 'required|min:5|max:60',
+        'nombreSuelo' => 'required|min:5|max:60',
         'infiltracion' => 'required',
       ]);
 

@@ -500,6 +500,10 @@ function Validate(errors){
 
   //Automatizacion de Riegos
   $('#autocheck').on('click', function() {
+    if($('#autotime').val() <= 0){
+      toastr.warning('Favor de indicar el tiempo de riego', 'Alerta', {timeOut: 3000});
+      return;
+    }
     var datos = {};
     //if($('#autocheck').prop('checked')){
       var sectores = document.querySelectorAll('input[name="SectorAu"]:checked'), values = [];
@@ -537,11 +541,12 @@ function Validate(errors){
       success: function(resultado){
         console.log(resultado);
         if(resultado.includes("apagado")){
-          toastr.warning(resultado, 'Exito', {timeOut: 3000});
+          toastr.warning(resultado, 'Exito', {timeOut: 4500});
         }else{
+          $("#Historial").load(location.href + " #Historial");
           toastr.success(resultado, 'Exito', {timeOut: 3000});
         }
-        LimpiarSectores();
+        //LimpiarSectores();
       },
       error: function(){
         toastr.warning('Error al accesar el servidor', 'Alerta', {timeOut: 3000});

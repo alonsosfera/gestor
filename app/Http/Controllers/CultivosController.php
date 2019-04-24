@@ -283,18 +283,19 @@ class CultivosController extends Controller
         $client = new \GuzzleHttp\Client();
         $response = $client->post($url, ['query' => $query]);
 
-        //$response->getQuery()->set('query', '123');
-
         if($response->getStatusCode() == '200'){
+          $startTime = date("Y-m-d H:i:s");
           $data = $response->getBody()->getContents();
 
           $resultado = json_decode($data);
           if($resultado->Exito=='Si entró'){
-            $res = 'Bien '.$resultado->Time;
-            $cultivo->Auto = 1;
-            $cultivo->save();
+            $res = 'Regando sectores ('.$resultado->Time.' minuto(s) c/u)';
+            /*$cultivo->Auto = 1;
+            $cultivo->save();*/
             foreach($request->all() as $sector){
-              \DB::table('sectores_auto')->insert(['idCultivo' => $id, 'Sector' => $sector]);
+              \DB::table('registro_riegos')->insert(['idCultivo' => $id, 'Area' => $sector, 'fecha' => $startTime]);
+              $startTime = date('Y-m-d H:i:s',strtotime('+'.$time.' minutes',strtotime($startTime)));
+              /*\DB::table('sectores_auto')->insert(['idCultivo' => $id, 'Sector' => $sector]);*/
             }
           }
         }else{

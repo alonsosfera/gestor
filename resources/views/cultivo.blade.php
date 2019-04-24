@@ -25,7 +25,7 @@
           <div class="card my-3" align-items-center style="height: 350px;">
             <h5 class="card-header">Sectores de Riego
               <div class="btn-group dropleft float-right">
-               <button class="btn btn-light btn-sm order-1 order-sm-0 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:0px; border:0;"><i class="fas fa-sync-alt fa-lg text-alert"></i></button>
+               <button class="btn btn-light btn-sm order-1 order-sm-0 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:0px; border:0;"><i class="fas fa-sync-alt fa-lg text-alert"></i>Auto</button>
                <div class="dropdown-menu keep-toggle" id="DropAuto" aria-labelledby="dropdownMenuButton">
                  <label class="dropdown-item">Automático: <button id="autocheck" class="btn btn-secondary btn-xs" type="button" name="button">ON</button><!--<label class="switch"><input id="autocheck" type="checkbox" @if($cultivo->Auto == 1)checked @endif><span class="slider round"></span></label>--></label>
                  <div class="dropdown-divider"></div>
