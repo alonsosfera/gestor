@@ -28,12 +28,12 @@ class RegistroRiegos extends Controller
     }
 
     public function RealizarRiego(Request $request){
-      
+
       $cultivo = Cultivo::findOrFail($request->idCultivo);
       $url = $cultivo->Sensor . ':3000/valvula/'.$request->idSector;
 
       $client = new \GuzzleHttp\Client();
-      $response = $client->get($url);
+      $response = $client->get($url, ['body' => ['username':'xMmQWHN97KFucDkt', 'password':'cjBxVmZFHhUs4EE2' ]]);
 
       if($response->getStatusCode() == '200'){
         $data = $response->getBody()->getContents();

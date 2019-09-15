@@ -208,9 +208,12 @@ class CultivosController extends Controller
 
         $cultivo = Cultivo::findOrFail($idC);
         $url = $cultivo->Sensor . ':3000/sensor/'.$id;
+        $body = array();
+        $body['username'] = 'xMmQWHN97KFucDkt';
+        $body['password'] = 'cjBxVmZFHhUs4EE2';
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->get($url);
+        $response = $client->get($url, ['form_params' => $body, 'auth' => ['xMmQWHN97KFucDkt', 'cjBxVmZFHhUs4EE2']]);
 
         if($response->getStatusCode() == '200'){
           $data = $response->getBody()->getContents();
@@ -231,57 +234,28 @@ class CultivosController extends Controller
       }
     }
 
-    /*public function Auto(Request $request, $id, $time){
+    public function Manual(Request $request, $id, $time){
+
       $res = "";
       $cultivo = Cultivo::findOrFail($id);
-      if(count($request->all())==0){
+      /*if(count($request->all())==0){
         $cultivo->Auto = 0;
         $cultivo->save();
         \DB::table('sectores_auto')->where('idCultivo', $id)->delete();
         $res =  'Riego automático apagado';
-      }else{
-        $url = $cultivo->Sensor . ':3000/vauto/'.$time;
-
-        $client = new \GuzzleHttp\Client();
-        $response = $client->get($url, $request);
-
-        if($response->getStatusCode() == '200'){
-          $data = $response->getBody()->getContents();
-          $valor = json_decode($data);
-          //\DB::table('registro_riegos')->insert(['idCultivo' => $request->idCultivo, 'Area' => $request->idSector]);
-          $cultivo->Auto = 1;
-          $cultivo->save();
-          foreach($request->all() as $sector){
-            \DB::table('sectores_auto')->insert(['idCultivo' => $id, 'Sector' => $sector]);
-          }
-          $res = $valor;//'Riego automático encendido';
-        }else{
-          $res = 'Error. Hay un problema con las valvulas';
-        }
-
-      }
-      return $res;
-    }*/
-
-    public function Auto(Request $request, $id, $time){
-
-      $res = "";
-      $cultivo = Cultivo::findOrFail($id);
-      if(count($request->all())==0){
-        $cultivo->Auto = 0;
-        $cultivo->save();
-        \DB::table('sectores_auto')->where('idCultivo', $id)->delete();
-        $res =  'Riego automático apagado';
-      }else{
+      }else{*/
         $query = array();
         foreach ($request->all() as $key => $value) {
           $query[$key] = $value;
         }
 
         $url = $cultivo->Sensor . ':3000/vauto/'.$time;
+        $body = array();
+        $body['username'] = 'xMmQWHN97KFucDkt';
+        $body['password'] = 'cjBxVmZFHhUs4EE2';
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->post($url, ['query' => $query]);
+        $response = $client->post($url, ['query' => $query, 'form_params' => $body, 'auth' => ['xMmQWHN97KFucDkt', 'cjBxVmZFHhUs4EE2']]);
 
         if($response->getStatusCode() == '200'){
           $startTime = date("Y-m-d H:i:s");
@@ -301,6 +275,38 @@ class CultivosController extends Controller
         }else{
           $res = 'Error. Hay un problema con las valvulas';
         }
+      //}
+
+      return $res;
+    }
+
+    public function Auto(Request $request, $id){
+      $res = "";
+      $cultivo = Cultivo::findOrFail($id);
+
+      $query = array();
+      foreach ($request->all() as $key => $value) {
+        $query[$key] = $value;
+        $res = $res.$value;
+      }
+      $query['pass'] = 'cjBxVmZFHhUs4EE2';
+
+
+      $url = $cultivo->Sensor . ':3000/autoriego/';
+      $client = new \GuzzleHttp\Client();
+      $response = $client->post($url, ['query' => $query]);
+
+      if($response->getStatusCode() == '200'){
+        $data = $response->getBody()->getContents();
+
+        $resultado = json_decode($data);
+        if($resultado->Exito=='Si entró'){
+          $res = 'Info: '.$resultado->Res;
+        }else{
+          $res = 'Error de autenticación';
+        }
+      }else{
+        $res = 'Error. Hay un problema con las valvulas';
       }
 
       return $res;

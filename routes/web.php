@@ -16,7 +16,9 @@ Route::get('/', 'CultivosController@getDashboard')->name('Dashboard');
 
 Auth::routes();
 
-Route::post('/auto/{id}/{time}', 'CultivosController@Auto');
+Route::post('/manual/{id}/{time}', 'CultivosController@Manual');
+
+Route::post('/auto/{id}', 'CultivosController@Auto');
 
 Route::get('/weather/{id}','CultivosController@getUrl');
 

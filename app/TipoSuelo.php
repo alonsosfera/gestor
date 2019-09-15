@@ -8,8 +8,11 @@ class TipoSuelo extends Model
 {
     protected $table = 'tipo_suelos';
 
-    public function Cultivos(){
-        //return $this->hasOne('App\Cultivo', 'TipoSuelo');
-        return $this->belongsTo('App\Cultivo', 'TipoSuelo');
-    }
+    protected $fillable=[
+      'id',
+      'name',
+      'descripcion',
+      'infiltracion'
+    ];
+
 }

@@ -185,3 +185,125 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.checkbox-menu li label {
+    display: block;
+    padding: 3px 10px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    margin:0;
+    transition: background-color .4s ease;
+}
+.checkbox-menu li input {
+    margin: 0px 5px;
+    top: 2px;
+    position: relative;
+}
+
+.checkbox-menu li.active label {
+    background-color: #cbcbff;
+    font-weight:bold;
+}
+
+.checkbox-menu li label:hover,
+.checkbox-menu li label:focus {
+    background-color: #f5f5f5;
+}
+
+.checkbox-menu li.active label:hover,
+.checkbox-menu li.active label:focus {
+    background-color: #b8b8ff;
+}
+
+.inputs-form .input-item label{
+	display: inline-block;
+	padding-right: 0.2em;
+	background: #fff;
+	height: 30px;
+	vertical-align: middle;
+	border-top: 1px solid #17468C;
+	border-right: 1px solid #17468C;
+	border-bottom: 1px solid #17468C;
+	border-left: none;
+	font-size: 20px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+	cursor: pointer;
+
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.inputs-form .input-item input{
+	width: 80%;
+	border-top: 1px solid #17468C;
+	border-left: 1px solid #17468C;
+	border-bottom: 1px solid #17468C;
+	border-right: none;
+	height: 30px;
+	padding-left: 0.3em;
+	vertical-align: top;
+	box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+	outline:0px;
+	border-radius: 0px;
+  text-align: center;
+	-webkit-border-radius: 0px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.labelCheck {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  line-height: 35px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  cursor: pointer
+}
+
+.labelC {
+  display: inline-block;
+  width: 55px;
+  height: 25px;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  line-height: 23px;
+  font-size: 15px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  cursor: pointer
+}
+
+.labelSect {
+  display: inline-block;
+  width: 70px;
+  height: 25px;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  line-height: 23px;
+  font-size: 15px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  cursor: pointer
+}
+
+input[type=checkbox]:checked + label {
+  background: #008000;
+  border: 2px solid #32CD32;
+  color: #fff;
+}
+
+.labelCheck:active, .labelC:active , .labelSect:active{
+  background-color: #3e8e41;
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
+}
+
+.select-size  input{
+  display: none;
+}

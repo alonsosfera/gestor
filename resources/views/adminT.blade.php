@@ -260,3 +260,9 @@
     </div>
   </div>
 @endsection
+
+@include('modals.nFruto')
+@include('modals.nRiego')
+@include('modals.nSuelo')
+@include('modals.nUsuario')
+@include('modals.nSensor')

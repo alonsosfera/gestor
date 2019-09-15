@@ -498,32 +498,24 @@ function Validate(errors){
     $('#autocheck').prop('checked', true);
   }*/
 
-  //Automatizacion de Riegos
+  //Riego Manual por Sectores
   $('#autocheck').on('click', function() {
     if($('#autotime').val() <= 0){
       toastr.warning('Favor de indicar el tiempo de riego', 'Alerta', {timeOut: 3000});
       return;
     }
     var datos = {};
-    //if($('#autocheck').prop('checked')){
       var sectores = document.querySelectorAll('input[name="SectorAu"]:checked'), values = [];
       if(sectores.length==0){
-        //$('#autocheck').prop('checked', false);
-        toastr.warning('Seleccionar sectores para riego automático', 'Alerta', {timeOut: 3000});
+        toastr.warning('Seleccionar sectores para riego manual', 'Alerta', {timeOut: 3000});
       }else{
         var index =1;
         Array.prototype.forEach.call(sectores, function(sector) {
           datos[index] = sector.value;
           index++;
         });
-        console.log(datos);
-        Automatizar(datos);
+        Manual(datos);
       }
-    /*}else{
-      LimpiarSectores();
-      $('#autotime').val(0);
-      Automatizar(null);
-    }*/
   });
 
   function LimpiarSectores(){
@@ -533,10 +525,10 @@ function Validate(errors){
     });
   }
 
-  function Automatizar(datos){
+  function Manual(datos){
     $.ajax({
       type: 'POST',
-      url: '/auto/'+$('#idC').text()+'/'+$('#autotime').val(),
+      url: '/manual/'+$('#idC').text()+'/'+$('#autotime').val(),
       data: datos,
       success: function(resultado){
         console.log(resultado);
@@ -546,10 +538,98 @@ function Validate(errors){
           $("#Historial").load(location.href + " #Historial");
           toastr.success(resultado, 'Exito', {timeOut: 3000});
         }
-        //LimpiarSectores();
       },
-      error: function(){
+      error: function(error){
         toastr.warning('Error al accesar el servidor', 'Alerta', {timeOut: 3000});
+        console.log(error);
       }
     });
   }
+
+  $('#AutoRiego').on('click', function(){
+    if(document.getElementById('EstadoAutomatico').title == 'Apagado'){
+      var datos = {};
+      var dias = document.querySelectorAll('input[name="DiasRiego"]:checked'), values = [];
+      if(dias.length==0){
+        toastr.warning('Seleccionar dia(s) para riego automatico', 'Alerta', {timeOut: 3000});
+      }else{
+        if($('#horariego').val() == 0 || $('#tiemporiego').val() ==0){
+          toastr.warning('Favor de llenar los campos faltantes', 'Alerta', {timeOut: 3000});
+          return;
+        }
+        datos['0'] = ConvertHour($('#horariego').val());
+        datos['1'] = $('#tiemporiego').val();
+        var index =2;
+        Array.prototype.forEach.call(dias, function(dia) {
+          datos[index] = dia.value;
+          index++;
+        });
+        RiegoAutomatico(datos);
+      }
+    }else{
+
+    }
+  });
+
+  function ConvertHour(time){
+    var tsplit = time.split(" ");
+    var horasplit = tsplit[0].split(":");
+    var res;
+
+    if(tsplit[1] == 'PM'){
+      if (horasplit[0]!=12)
+        {
+            horasplit[0]= parseInt(horasplit[0])+12;
+        }
+    }
+    res = horasplit[0] + ':00';
+    return res;
+  }
+
+  function RiegoAutomatico(datos){
+    $.ajax({
+      type: 'POST',
+      url: '/auto/'+$('#idC').text(),
+      data: datos,
+      success: function(resultado){
+        console.log(resultado);
+        if(resultado.includes("autenticación")){
+          toastr.warning(resultado, 'Error', {timeOut: 4500});
+        }else{
+          toastr.success(resultado, 'Exito', {timeOut: 4500});
+        }
+
+      },
+      error: function(error){
+        toastr.warning('Error al accesar el servidor', 'Alerta', {timeOut: 3000});
+        console.log(error);
+      }
+    });
+  }
+
+  $(".checkbox-menu").on("change", "input[type='checkbox']", function() {
+   $(this).closest("li").toggleClass("active", this.checked);
+  });
+
+  $(document).on('click', '.allow-focus', function (e) {
+    e.stopPropagation();
+  });
+
+  function toggle(source) {
+    checkboxes = document.getElementsByName('DiasRiego');
+    for(var i=0, n=checkboxes.length;i<n;i++) {
+      checkboxes[i].checked = source.checked;
+    }
+  }
+
+  $(document).ready(function(){
+    $('input.timepicker').timepicker({});
+  });
+
+  $('.timepicker').timepicker({
+    timeFormat: 'hh:mm p',
+    interval: 60,
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true
+});

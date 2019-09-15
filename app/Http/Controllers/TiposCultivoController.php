@@ -21,12 +21,12 @@ class TiposCultivoController extends Controller
       'correo' => 'required|string|email|max:255'
     ]);
 
-    $fruto = new User;
-    $fruto->name = $request->input('nombre');
-    $fruto->username = $request->input('usuario');
-    $fruto->email = $request->input('correo');
-    $fruto->password = $request->input('usuario');
-    $fruto->Client = 0;
+    $user = new User;
+    $user->name = $request->input('nombre');
+    $user->username = $request->input('usuario');
+    $user->email = $request->input('correo');
+    $user->password = $request->input('usuario');
+    $user->Client = 0;
 
     $user->save();
     return response()->json($user);
